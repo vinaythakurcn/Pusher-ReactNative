@@ -21,15 +21,12 @@ export default function App() {
   let logLines: string[] = [];
   const pusher = Pusher.getInstance();
 
-  const [apiKey, onChangeApiKey] = React.useState('9e604d725d5bd7b20baa');
-  const [cluster, onChangeCluster] = React.useState('ap2');
-  const [channelName, onChangeChannelName] = React.useState(
-    'private-vinay-channel',
-  );
-  const [eventName, onChangeEventName] = React.useState('some-event');
+  const [apiKey, onChangeApiKey] = React.useState('UPDATE WITH YOUR API KEY');
+  const [cluster, onChangeCluster] = React.useState('UPDATE WITH YOUR CLUSTER');
+  const [channelName, onChangeChannelName] = React.useState('UPDATE WITH YOUR CHANNEL NAME');
+  const [eventName, onChangeEventName] = React.useState('UPDATE WITH YOUR EVENT NAME');
   const [eventData, onChangeEventData] = React.useState('');
   const [members, onChangeMembers] = React.useState<PusherMember[]>([]);
-
 
   const connect = async () => {
     try {
@@ -102,7 +99,9 @@ export default function App() {
     message: string,
     e: any,
   ) => {
-    console.log(`onSubscriptionError: ${message}, channelName: ${channelName} e: ${e}`);
+    console.log(
+      `onSubscriptionError: ${message}, channelName: ${channelName} e: ${e}`,
+    );
   };
 
   const onDecryptionFailure = (eventName: string, reason: string) => {
@@ -126,6 +125,9 @@ export default function App() {
       `calling onAuthorizer. channelName=${channelName}, socketId=${socketId}`,
     );
 
+    /**
+     * MAKE AUHORIZING CALL TO YOUR SERVER
+     */
     const response = await fetch('http://192.168.1.9:3000/', {
       method: 'POST',
       headers: {
@@ -160,8 +162,11 @@ export default function App() {
         log('ERROR: ' + e);
       }
      * 
-     *  */ 
-    
+     *  */
+
+    /**
+     * UPDATE WITH YOUR SERVER ENDPOINT
+     */
     const response = await fetch('http://192.168.1.9:3000/triggerEvent', {
       method: 'POST',
       headers: {
